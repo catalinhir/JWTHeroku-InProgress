@@ -26,7 +26,7 @@ public class UserController {
     private CustomUserDetailsService customUserDetailsService;
     @Autowired
     private UserEntityRepository userEntityRepository;
-    @GetMapping("/get")
+    @GetMapping("/getroles")
     public HashMap getCurrentUser(@RequestHeader("Authorization") String auths) {
         Integer userId = jwtProvider.getLoginFromToken(auths.substring(7));
         CustomUserDetails customUserDetails = customUserDetailsService.loadUserById(userId);
@@ -53,6 +53,18 @@ public class UserController {
         return ResponseEntity.ok(foundTasks);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UserEntity> updateTask(@RequestBody UserEntity userEntity, @PathVariable Integer id)
+    {
+        if (userEntity.getId() == null || !userEntity.getId().equals(id))
+            return ResponseEntity.badRequest().build();
+        if (userEntityRepository.findById(id).isEmpty())
+            return ResponseEntity.notFound().build();
+
+        UserEntity updatedTask = userEntityRepository.save(userEntity);
+
+        return ResponseEntity.ok(updatedTask);
+    }
 
     @PutMapping("/update")
     public UserEntity updateRole(@RequestBody UpdateRoleRequest request) {
@@ -64,10 +76,6 @@ public class UserController {
         //update the user with modified values
 
     }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UserEntity> deleteUser(@PathVariable Integer id) {
-         userEntityRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
+
 
 }
