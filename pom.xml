@@ -14,7 +14,11 @@
 	<name>JWT-Spring-Security</name>
 	<description>Authentication and Authorization Microservice for elearning Project</description>
 	<properties>
-		<java.version>14</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		<spring-cloud.version>Hoxton.SR5</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
