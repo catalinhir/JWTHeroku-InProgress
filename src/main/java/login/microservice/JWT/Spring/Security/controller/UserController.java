@@ -38,14 +38,14 @@ public class UserController {
         map.put("id", userService.findByLogin(auth.getName()).getId());
         return (HashMap) map;
     }
-    @GetMapping("/{id}")
+    /* @GetMapping("/{id}")
     public ResponseEntity<UserEntity> listUser(@PathVariable Integer id)
     {
         Optional<UserEntity> foundUser = userEntityRepository.findById(id);
         if (foundUser.isEmpty())
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(foundUser.get());
-    }
+    } */
     @GetMapping("/all")
     public ResponseEntity<Iterable<UserEntity>> listAllUsers()
     {
